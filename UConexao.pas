@@ -59,7 +59,7 @@ begin
   sql := EmptyStr;
   for Equipe in Equipes do
     sql := sql + ' UPDATE equipe' +
-                 '    SET nome = "' + Equipe.Nome + '"' +
+                 '    SET nome = ''' + Equipe.Nome + '''' +
                  ' WHERE equipe_id = ' + Equipe.EquipeId.ToString + ';' + sLineBreak;
 
   ExecutarComando(sql);
@@ -144,7 +144,7 @@ begin
   sql := 'INSERT INTO equipe (nome) VALUES';
 
   for Equipe in Equipes do
-    sql := sql + ' ("' + Equipe.Nome + '"),' + sLineBreak;
+    sql := sql + ' (''' + Equipe.Nome + '''),' + sLineBreak;
 
   sql := Trim(sql);
   sql := Copy(sql, 1, Length(sql) - 1);
@@ -286,7 +286,7 @@ var
   ds: TFDQuery;
 begin
   sql := ' INSERT INTO pergunta (texto)' +
-         ' VALUES ("' + Pergunta + '")';
+         ' VALUES (''' + Pergunta + ''')';
   ExecutarComando(sql);
 
   sql := 'SELECT last_insert_rowid()';
@@ -300,7 +300,7 @@ var
   sql: String;
 begin
   sql := ' UPDATE pergunta' +
-         ' SET texto = "' + Pergunta + '"' +
+         ' SET texto = ''' + Pergunta + '''' +
          ' WHERE pergunta_id = ' + PerguntaId.ToString;
   ExecutarComando(sql);
 end;
@@ -317,7 +317,7 @@ begin
   for Resposta in Respostas do
   begin
     sql := ' INSERT INTO resposta (pergunta_id, texto, correta)' +
-           ' VALUES (' + PerguntaId.ToString + ', "' + Resposta.Resposta + '", ' + Resposta.Correta.ToString + ')';
+           ' VALUES (' + PerguntaId.ToString + ', ''' + Resposta.Resposta + ''', ' + Resposta.Correta.ToString + ')';
     ExecutarComando(sql);
   end;
 end;
